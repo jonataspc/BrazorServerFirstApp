@@ -1,0 +1,13 @@
+﻿@page "/calendar"
+@inject DialogService DialogService
+@using Models
+
+@*<RadzenButton ButtonStyle="ButtonStyle.Secondary" Click="@ButtonClicked" Text="@text"></RadzenButton>*@
+
+<RadzenScheduler @ref=@scheduler style="height: 768px;" TItem="Appointment" Data=@appointments StartProperty="Start" EndProperty="End"
+                 TextProperty="Text" SelectedIndex="2"
+                 SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
+    <RadzenDayView />
+    <RadzenWeekView />
+    <RadzenMonthView />
+</RadzenScheduler>
