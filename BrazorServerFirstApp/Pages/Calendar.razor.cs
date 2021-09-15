@@ -9,20 +9,19 @@ namespace BrazorServerFirstApp.Pages
 {
     public partial class Calendar
     {
-
-        string text = "Click me!";
+        private string text = "Click me!";
 
         private void ButtonClicked()
         {
             text = $"Clicked at {DateTime.Now:F}";
         }
 
+        private RadzenScheduler<Appointment> scheduler;
 
-        RadzenScheduler<Appointment> scheduler;
         //EventConsole console;
-        Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+        private Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
 
-        IList<Appointment> appointments = new List<Appointment>
+        private IList<Appointment> appointments = new List<Appointment>
     {
     new Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
     new Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
@@ -33,7 +32,7 @@ namespace BrazorServerFirstApp.Pages
     new Appointment { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
     };
 
-        async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
+        private async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
         {
             //console.Log($"SlotSelect: Start={args.Start} End={args.End}");
 

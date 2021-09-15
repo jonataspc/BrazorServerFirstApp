@@ -34,7 +34,8 @@
         <div class="col">
             <RadzenButton ButtonType="ButtonType.Submit" Text="Save" />
 
-            <RadzenButton ButtonStyle="ButtonStyle.Warning" Click="@DeleteAppointment" Text="Delete"></RadzenButton>
+            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Text="Delete" Click="@((args) => ClientDeleteButtonClick(@model))" @onclick:stopPropagation="true"></RadzenButton>
+
 
         </div>
     </div>
@@ -58,6 +59,20 @@
     private void DeleteAppointment()
     {
         DialogService.Close(model);
+    }
+
+    protected async System.Threading.Tasks.Task ClientDeleteButtonClick(Appointment appointment)
+    {
+    // Ask for confirmation:
+        var confirmResult = await DialogService.Confirm(
+            "Are you sure?");
+
+        if (confirmResult.HasValue && confirmResult.Value)
+        {
+
+                DialogService.Close(model);
+
+        }
     }
 
 }
